@@ -1,3 +1,4 @@
+use std::path::Path;
 use std::error::Error;
 use std::process::Command;
 
@@ -37,5 +38,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Check for ld.lld
     check_install("ld.lld", &["--version"], &["LLD "]).ok_or("ld.lld not present in the path")?;
 
+    // Build the stage0
+    let stage0 = Path::new("bootloader").join("src").join("stage0.asm");
+    println!("{:?}\n", stage0);
     Ok(())
 }
